@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Final: Mi Test Mental de Arranque</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none;
+            }
+            .printable-section {
+                border: none !important;
+                box-shadow: none !important;
+                margin-bottom: 2rem;
+            }
+        }
+        .scale-input {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #4A5568;
+            outline: none;
+            border-radius: 4px;
+            transition: opacity .2s;
+        }
+        .scale-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #22D3EE;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 4px solid #1a202c;
+        }
+        .scale-input::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #22D3EE;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 4px solid #1a202c;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex justify-center p-4 sm:p-8">
+    <main class="w-full max-w-4xl space-y-10">
+        <header class="text-center">
+            <p class="text-lg font-semibold text-cyan-400">PRÁCTICA FINAL DEL MÓDULO 1</p>
+            <h1 class="text-4xl md:text-5xl font-black">Mi Test Mental de Arranque</h1>
+        </header>
+        <section id="test-mentalidad" class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 printable-section">
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🧠</span> Sección 1: Test de Mentalidad</h2>
+            <p class="text-gray-400 mb-8">Evalúa cada afirmación en una escala de 1 (totalmente en desacuerdo) a 5 (totalmente de acuerdo).</p>
+            <div id="questions-container" class="space-y-6"></div>
+            <div class="mt-8 pt-6 border-t border-gray-700">
+                <h3 class="text-xl font-bold">Resultado Total: <span id="total-score" class="text-cyan-400">0</span></h3>
+                <div id="result-interpretation" class="mt-2 text-lg font-semibold h-8"></div>
+                <div class="text-sm text-gray-400 mt-4">
+                    <p><span class="font-bold text-green-400">5–10:</span> Control emocional fuerte.</p>
+                    <p><span class="font-bold text-yellow-400">11–20:</span> Vulnerable a decisiones impulsivas.</p>
+                    <p><span class="font-bold text-red-400">21–25:</span> Cuidado, mente altamente reactiva.</p>
+                </div>
+            </div>
+        </section>
+        <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 printable-section">
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">✍️</span> Sección 2: Espejo Emocional</h2>
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-lg font-semibold mb-2" for="error-emocional">¿Cuál fue tu peor error emocional operando?</label>
+                    <textarea id="error-emocional" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                </div>
+                <div>
+                    <label class="block text-lg font-semibold mb-2" for="sentimiento">¿Qué sentiste en ese momento?</label>
+                    <textarea id="sentimiento" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                </div>
+                <div>
+                    <label class="block text-lg font-semibold mb-2" for="diferente">¿Qué harías diferente si te pasara otra vez?</label>
+                    <textarea id="diferente" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                </div>
+            </div>
+        </section>
+        <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 printable-section">
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🎯</span> Reto: Observación Consciente</h2>
+            <p class="text-gray-400 mb-6">Durante 3 días, no operes. Solo observa el mercado y registra tus respuestas aquí.</p>
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-lg font-semibold mb-2" for="reto-emociones">¿Qué emociones aparecen al ver una oportunidad clara de trading?</label>
+                    <textarea id="reto-emociones" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                </div>
+                <div>
+                    <label class="block text-lg font-semibold mb-2" for="reto-no-entrar">¿Qué pasa en tu mente y cuerpo si decides no entrar en esa operación?</label>
+                    <textarea id="reto-no-entrar" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                </div>
+                <div>
+                    <label class="block text-lg font-semibold mb-2" for="reto-paz-ansiedad">¿Te sientes en paz o con ansiedad?</label>
+                    <textarea id="reto-paz-ansiedad" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                </div>
+            </div>
+        </section>
+        <div class="text-center py-6 no-print">
+            <button onclick="window.print()" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
+                Imprimir o Guardar como PDF
+            </button>
+        </div>
+    </main>
+    <script>
+        const questions = [
+            "Me frustro rápido cuando el trade no sale bien",
+            "He operado sin plan solo por impulso",
+            "Me cuesta aceptar una pérdida",
+            "Me afecta ver operaciones rojas",
+            "Me saboteo cuando las cosas no salen como quiero"
+        ];
+        const questionsContainer = document.getElementById('questions-container');
+        const totalScoreEl = document.getElementById('total-score');
+        const resultInterpretationEl = document.getElementById('result-interpretation');
+        let scores = new Array(questions.length).fill(1);
+
+        function renderQuestions() {
+            questions.forEach((q, i) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-item';
+                questionDiv.innerHTML = `
+                    <label for="q${i}" class="block text-lg mb-3">${i + 1}. ${q}</label>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-400">1</span>
+                        <input type="range" id="q${i}" min="1" max="5" value="1" class="scale-input" data-index="${i}">
+                        <span class="text-gray-400">5</span>
+                        <span id="q${i}-value" class="font-bold text-xl text-cyan-400 w-8 text-center">${scores[i]}</span>
+                    </div>
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+        }
+
+        function calculateTotal() {
+            const total = scores.reduce((sum, current) => sum + current, 0);
+            totalScoreEl.textContent = total;
+            let interpretation = '';
+            let colorClass = '';
+            if (total >= 5 && total <= 10) {
+                interpretation = 'Control emocional fuerte.';
+                colorClass = 'text-green-400';
+            } else if (total >= 11 && total <= 20) {
+                interpretation = 'Vulnerable a decisiones impulsivas.';
+                colorClass = 'text-yellow-400';
+            } else if (total >= 21 && total <= 25) {
+                interpretation = 'Cuidado, mente altamente reactiva.';
+                colorClass = 'text-red-400';
+            }
+            resultInterpretationEl.textContent = interpretation;
+            resultInterpretationEl.className = `mt-2 text-lg font-semibold h-8 transition-all duration-300 ${colorClass}`;
+        }
+
+        questionsContainer.addEventListener('input', (e) => {
+            if (e.target.type === 'range') {
+                const index = parseInt(e.target.dataset.index);
+                const value = parseInt(e.target.value);
+                scores[index] = value;
+                document.getElementById(`q${index}-value`).textContent = value;
+                calculateTotal();
+            }
+        });
+
+        renderQuestions();
+        calculateTotal();
+    </script>
+</body>
+</html>
