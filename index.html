@@ -5,11 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Práctica Final: Mi Test Mental de Arranque</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome para íconos de redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #030712; /* Fondo casi negro consistente */
+            color: #E5E7EB; /* Texto gris claro consistente */
+            overflow-x: hidden; /* Evita scroll horizontal */
+            min-height: 100vh; /* Asegura que el body ocupe al menos la altura completa del viewport */
+            display: flex; /* Convierte el body en un flex container */
+            flex-direction: column; /* Apila los hijos verticalmente */
+            align-items: center; /* Centra los hijos horizontalmente si no ocupan todo el ancho */
+            padding: 0; /* Elimina padding directo del body para aplicarlo en el contenedor de contenido */
         }
+        /* Grano/Ruido sutil para el fondo, copiado de la landing page */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/png;base64,iVB0SUhEUgAAADAAAAAwCAMAAAD9gGz5AAAAAXNSR0IB2cksfwAAAAlwSFlzAAAWJQAAFiUAUFXgxwAAABhQTFRFAAAAsND/sND/sND/sND/sND/sND/sND/sND/jQ0vAAAACnRSTlMAAAAA+wD49z8nBA+MvK+1nQAAABpJREFUeJxjYmBgZGSAjYAAhjFGEGAABgBcA1M77D2NwgAAAABJRU5ErkJggg=='); /* Pequeña imagen de grano */
+            background-repeat: repeat;
+            opacity: 0.02; /* Muy baja opacidad */
+            pointer-events: none; /* Asegura que no interfiera con interacciones */
+            z-index: -1;
+        }
+
+        /* Define una variable CSS para la fuente del encabezado */
+        :root {
+            --heading-font: 'Montserrat', sans-serif; /* Montserrat aplicada por defecto ahora */
+        }
+
+        /* Aplica la fuente Montserrat a todos los h1 y h2 */
+        h1, h2 {
+            font-family: var(--heading-font);
+        }
+
         @media print {
             body {
                 -webkit-print-color-adjust: exact;
@@ -52,69 +87,177 @@
             border-radius: 50%;
             border: 4px solid #1a202c;
         }
+
+        /* Estilos de la landing page copiados para consistencia */
+        .section-glow {
+            box-shadow:
+                0 0 40px rgba(34, 211, 238, 0.1), /* Sombra principal más fuerte */
+                0 0 80px rgba(34, 211, 238, 0.05), /* Sombra de halo exterior */
+                0 0 120px rgba(6, 182, 212, 0.03); /* Sombra más difusa */
+            border-radius: 1.5rem; /* Bordes más redondeados para un look premium */
+            overflow: hidden; /* Asegura que las sombras internas se recorten */
+            transition: box-shadow 0.5s ease-in-out; /* Transición suave para el brillo */
+        }
+        .section-glow:hover {
+            box-shadow:
+                0 0 60px rgba(34, 211, 238, 0.15),
+                0 0 100px rgba(34, 211, 238, 0.08),
+                0 0 150px rgba(6, 182, 212, 0.05);
+        }
+        .social-icon {
+            font-size: 1.8rem; /* Tamaño del ícono por defecto en footer */
+            color: #E5E7EB; /* Color por defecto */
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1); /* Efecto de elevación y escala sutil */
+        }
+        .social-icon.header-social {
+            font-size: 2.8rem; /* Tamaño más grande para íconos en el header */
+        }
+        .social-icon.fa-telegram:hover {
+            color: #0088CC; /* Color de Telegram */
+        }
+        .social-icon.fa-instagram:hover {
+            color: #E4405F; /* Color de Instagram */
+        }
+        .social-icon.fa-facebook:hover {
+            color: #1877F2; /* Color de Facebook */
+        }
+        .social-icon.fa-tiktok:hover {
+            color: #69C9D0; /* Color de TikTok (principal) */
+        }
+
+        .button-print {
+            background-color: #06B6D4; /* cyan-500 */
+            color: #030712; /* Texto casi negro */
+            font-weight: 700; /* Bold */
+            padding: 1rem 2.5rem; /* Aumentar padding */
+            border-radius: 0.75rem; /* Bordes más redondeados */
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3); /* Sombra cian */
+        }
+        .button-print:hover {
+            background-color: #22D3EE; /* cyan-400 */
+            transform: translateY(-4px) scale(1.02); /* Efecto de "lift" más pronunciado */
+            box-shadow: 0 12px 25px rgba(6, 182, 212, 0.4); /* Sombra más grande al pasar el mouse */
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-white flex justify-center p-4 sm:p-8">
-    <main class="w-full max-w-4xl space-y-10">
-        <header class="text-center">
-            <p class="text-lg font-semibold text-cyan-400">PRÁCTICA FINAL DEL MÓDULO 1</p>
-            <h1 class="text-4xl md:text-5xl font-black">Mi Test Mental de Arranque</h1>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+    <!-- Contenedor principal para el header y main, para controlar el centrado y padding -->
+    <div class="flex-grow w-full max-w-4xl mx-auto p-4 sm:p-8">
+        <header class="text-center py-8 bg-gray-800 rounded-2xl section-glow mb-10">
+            <!-- Logo al principio de la página -->
+            <img src="https://i.postimg.cc/nVW2PvKM/logo-png-oficial-fondo-trasparente.png" alt="Logo para_traders_" class="mx-auto h-24 w-auto mb-6 opacity-90">
+
+            <p class="text-lg font-semibold text-cyan-400 uppercase">PRÁCTICA FINAL DEL MÓDULO 1</p>
+            <h1 class="text-4xl md:text-5xl font-black mt-2">Mi Test Mental de Arranque</h1>
+
+            <!-- Redes Sociales en Header -->
+            <div class="flex justify-center space-x-8 mt-8 mb-4">
+                <a href="https://t.me/erostrading" target="_blank" rel="noopener noreferrer" aria-label="Telegram de para_traders_">
+                    <i class="fab fa-telegram header-social social-icon text-gray-300 hover:text-cyan-400"></i>
+                </a>
+                <a href="https://www.instagram.com/para_traders__?igsh=MXd0eGdtZ3ZnaWJxag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram de para_traders_">
+                    <i class="fab fa-instagram header-social social-icon text-gray-300 hover:text-pink-500"></i>
+                </a>
+                <a href="https://www.facebook.com/paraltraders" target="_blank" rel="noopener noreferrer" aria-label="Facebook de para_traders_">
+                    <i class="fab fa-facebook header-social social-icon text-gray-300 hover:text-blue-600"></i>
+                </a>
+                <a href="https://www.tiktok.com/@para_traders?_t=ZT-8yicg47qPio&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok de para_traders_">
+                    <i class="fab fa-tiktok header-social social-icon text-gray-300 hover:text-teal-400"></i>
+                </a>
+            </div>
         </header>
-        <section id="test-mentalidad" class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 printable-section">
-            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🧠</span> Sección 1: Test de Mentalidad</h2>
-            <p class="text-gray-400 mb-8">Evalúa cada afirmación en una escala de 1 (totalmente en desacuerdo) a 5 (totalmente de acuerdo).</p>
-            <div id="questions-container" class="space-y-6"></div>
-            <div class="mt-8 pt-6 border-t border-gray-700">
-                <h3 class="text-xl font-bold">Resultado Total: <span id="total-score" class="text-cyan-400">0</span></h3>
-                <div id="result-interpretation" class="mt-2 text-lg font-semibold h-8"></div>
-                <div class="text-sm text-gray-400 mt-4">
-                    <p><span class="font-bold text-green-400">5–10:</span> Control emocional fuerte.</p>
-                    <p><span class="font-bold text-yellow-400">11–20:</span> Vulnerable a decisiones impulsivas.</p>
-                    <p><span class="font-bold text-red-400">21–25:</span> Cuidado, mente altamente reactiva.</p>
+
+        <main class="space-y-10">
+            <section id="test-mentalidad" class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 section-glow printable-section">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🧠</span> Sección 1: Test de Mentalidad</h2>
+                <p class="text-gray-400 mb-8">Evalúa cada afirmación en una escala de 1 (totalmente en desacuerdo) a 5 (totalmente de acuerdo).</p>
+                <div id="questions-container" class="space-y-6"></div>
+                <div class="mt-8 pt-6 border-t border-gray-700">
+                    <h3 class="text-xl font-bold">Resultado Total: <span id="total-score" class="text-cyan-400">0</span></h3>
+                    <div id="result-interpretation" class="mt-2 text-lg font-semibold h-8"></div>
+                    <div class="text-sm text-gray-400 mt-4">
+                        <p><span class="font-bold text-green-400">5–10:</span> Control emocional fuerte.</p>
+                        <p><span class="font-bold text-yellow-400">11–20:</span> Vulnerable a decisiones impulsivas.</p>
+                        <p><span class="font-bold text-red-400">21–25:</span> Cuidado, mente altamente reactiva.</p>
+                    </div>
                 </div>
+            </section>
+
+            <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 section-glow printable-section">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">✍️</span> Sección 2: Espejo Emocional</h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-lg font-semibold mb-2" for="error-emocional">¿Cuál fue tu peor error emocional operando?</label>
+                        <textarea id="error-emocional" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-lg font-semibold mb-2" for="sentimiento">¿Qué sentiste en ese momento?</label>
+                        <textarea id="sentimiento" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-lg font-semibold mb-2" for="diferente">¿Qué harías diferente si te pasara otra vez?</label>
+                        <textarea id="diferente" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 section-glow printable-section">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🎯</span> Reto: Observación Consciente</h2>
+                <p class="text-gray-400 mb-6">Durante 3 días, no operes. Solo observa el mercado y registra tus respuestas aquí.</p>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-lg font-semibold mb-2" for="reto-emociones">¿Qué emociones aparecen al ver una oportunidad clara de trading?</label>
+                        <textarea id="reto-emociones" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-lg font-semibold mb-2" for="reto-no-entrar">¿Qué pasa en tu mente y cuerpo si decides no entrar en esa operación?</label>
+                        <textarea id="reto-no-entrar" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-lg font-semibold mb-2" for="reto-paz-ansiedad">¿Te sientes en paz o con ansiedad?</label>
+                        <textarea id="reto-paz-ansiedad" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <div class="text-center py-6 no-print">
+                <button onclick="window.print()" class="button-print">
+                    Imprimir o Guardar como PDF
+                </button>
             </div>
-        </section>
-        <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 printable-section">
-            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">✍️</span> Sección 2: Espejo Emocional</h2>
-            <div class="space-y-6">
-                <div>
-                    <label class="block text-lg font-semibold mb-2" for="error-emocional">¿Cuál fue tu peor error emocional operando?</label>
-                    <textarea id="error-emocional" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
-                </div>
-                <div>
-                    <label class="block text-lg font-semibold mb-2" for="sentimiento">¿Qué sentiste en ese momento?</label>
-                    <textarea id="sentimiento" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
-                </div>
-                <div>
-                    <label class="block text-lg font-semibold mb-2" for="diferente">¿Qué harías diferente si te pasara otra vez?</label>
-                    <textarea id="diferente" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
-                </div>
-            </div>
-        </section>
-        <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border border-gray-700 printable-section">
-            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🎯</span> Reto: Observación Consciente</h2>
-            <p class="text-gray-400 mb-6">Durante 3 días, no operes. Solo observa el mercado y registra tus respuestas aquí.</p>
-            <div class="space-y-6">
-                <div>
-                    <label class="block text-lg font-semibold mb-2" for="reto-emociones">¿Qué emociones aparecen al ver una oportunidad clara de trading?</label>
-                    <textarea id="reto-emociones" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
-                </div>
-                <div>
-                    <label class="block text-lg font-semibold mb-2" for="reto-no-entrar">¿Qué pasa en tu mente y cuerpo si decides no entrar en esa operación?</label>
-                    <textarea id="reto-no-entrar" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
-                </div>
-                <div>
-                    <label class="block text-lg font-semibold mb-2" for="reto-paz-ansiedad">¿Te sientes en paz o con ansiedad?</label>
-                    <textarea id="reto-paz-ansiedad" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"></textarea>
-                </div>
-            </div>
-        </section>
-        <div class="text-center py-6 no-print">
-            <button onclick="window.print()" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
-                Imprimir o Guardar como PDF
-            </button>
+        </main>
+    </div>
+
+    <!-- Pie de página con logo, redes sociales y disclaimer -->
+    <footer class="text-center py-12 px-4 bg-gray-900 border-t border-gray-700 w-full max-w-4xl mx-auto">
+        <!-- Logo en el pie de página -->
+        <img src="https://i.postimg.cc/nVW2PvKM/logo-png-oficial-fondo-trasparente.png" alt="Logo de para_traders_" class="mx-auto h-20 w-auto mb-6 opacity-80" loading="lazy">
+        
+        <!-- Redes sociales -->
+        <div class="flex justify-center space-x-6 mb-6">
+            <a href="https://t.me/erostrading" target="_blank" rel="noopener noreferrer" aria-label="Telegram de para_traders_">
+                <i class="fab fa-telegram social-icon"></i>
+            </a>
+            <a href="https://www.instagram.com/para_traders__?igsh=MXd0eGdtZ3ZnaWJxag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram de para_traders_">
+                <i class="fab fa-instagram social-icon"></i>
+            </a>
+            <a href="https://www.facebook.com/paraltraders" target="_blank" rel="noopener noreferrer" aria-label="Facebook de para_traders_">
+                <i class="fab fa-facebook social-icon"></i>
+            </a>
+            <a href="https://www.tiktok.com/@para_traders?_t=ZT-8yicg47qPio&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok de para_traders_">
+                <i class="fab fa-tiktok social-icon"></i>
+            </a>
         </div>
-    </main>
+
+        <p class="text-sm text-gray-500 max-w-2xl mx-auto">
+            Aviso Legal: "para_traders_" ofrece contenido educativo y de desarrollo personal en el ámbito del psicotrading. Este curso no constituye asesoramiento financiero, de inversión ni recomendación de productos financieros específicos. Operar en los mercados financieros implica un riesgo significativo de pérdida de capital y no es adecuado para todos los inversores. Los resultados pasados no garantizan resultados futuros. Las decisiones de inversión son responsabilidad exclusiva del usuario.
+        </p>
+    </footer>
+
     <script>
         const questions = [
             "Me frustro rápido cuando el trade no sale bien",
